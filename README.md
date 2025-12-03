@@ -1,2 +1,2 @@
-# jomi
-i  am  a web developer
+# project
+github
