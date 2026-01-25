@@ -17,7 +17,6 @@
     body {
       height: 100%;
       overflow: hidden;
-      /* 🚫 NO SCROLL */
       font-family: Arial, sans-serif;
     }
 
@@ -42,15 +41,15 @@
       }
     }
 
-    /* ===== NAVBAR ===== */
+    /* ===== NAV ===== */
     nav {
       height: 60px;
       background: rgba(10, 10, 10, 0.95);
-      color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 20px;
+      color: white;
     }
 
     .logo {
@@ -64,7 +63,6 @@
 
     .logo::before {
       content: "◉";
-      color: #00e0c6;
     }
 
     nav ul {
@@ -82,29 +80,39 @@
       color: #00e0c6;
     }
 
-    /* ===== MAIN VIEW ===== */
+    /* ===== MAIN ===== */
     main {
       height: calc(100% - 60px);
+      position: relative;
     }
 
-    /* sections act like screens */
+    /* ===== SECTIONS (FIXED) ===== */
     .section {
-      display: none;
-      height: 100%;
-      width: 100%;
+      position: absolute;
+      inset: 0;
       padding: 30px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.98);
+      transition: all 0.5s ease;
     }
 
     .section.active {
-      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
     }
 
     /* ===== HOME ===== */
     #about {
       color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: row;
       gap: 30px;
     }
 
@@ -122,7 +130,6 @@
       line-height: 1.5;
     }
 
-    /* Laptop */
     .laptop {
       width: 220px;
       height: 140px;
@@ -130,8 +137,8 @@
       border-radius: 10px;
       background: #0c0f14;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       animation: float 3s ease-in-out infinite;
     }
 
@@ -158,10 +165,8 @@
 
     /* ===== SKILLS ===== */
     #skills {
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
       color: white;
+      gap: 20px;
     }
 
     .skill-bar {
@@ -170,7 +175,6 @@
       background: #222;
       border-radius: 20px;
       overflow: hidden;
-      margin-top: 20px;
     }
 
     .skill-fill {
@@ -178,21 +182,18 @@
       width: 0;
       background: #00e0c6;
       color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       transition: width 4s ease;
-      /* 🐢 slower */
     }
 
     /* ===== CONTACT ===== */
     #contact {
-      justify-content: center;
-      align-items: center;
       color: white;
-      text-align: center;
       font-size: 24px;
+      gap: 10px;
       animation: contactFade 1.5s ease;
     }
 
@@ -214,10 +215,6 @@
         flex-direction: column;
         text-align: center;
       }
-
-      nav ul {
-        gap: 10px;
-      }
     }
   </style>
 </head>
@@ -227,29 +224,24 @@
   <nav>
     <div class="logo">J Code</div>
     <ul>
-      <li onclick="showSection('about')" class="active" id="nav-about">Home</li>
-      <li onclick="showSection('skills')" id="nav-skills">Skills</li>
-      <li onclick="showSection('contact')" id="nav-contact">Contact</li>
+      <li id="nav-about" class="active" onclick="showSection('about')">Home</li>
+      <li id="nav-skills" onclick="showSection('skills')">Skills</li>
+      <li id="nav-contact" onclick="showSection('contact')">Contact</li>
     </ul>
   </nav>
 
   <main>
-    <!-- HOME -->
+
     <section id="about" class="section active">
       <div class="home-text">
         <h1>Hi, I’m Jomiloju 👋</h1>
-        <p>
-          I build clean, responsive websites using HTML, CSS and JavaScript.
-          Trained at Digital World Tech.
-        </p>
+        <p>I build clean, responsive websites using HTML, CSS and JavaScript.</p>
       </div>
-
       <div class="laptop">
         <div class="code" id="typing"></div>
       </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills" class="section">
       <h1>Skills</h1>
       <div class="skill-bar">
@@ -257,44 +249,37 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="section">
-      <div>
-        <p>📧 Adegunjujomiloju@gmail.com</p>
-        <p>📞 +234 812 223 0196</p>
-      </div>
+      <p>📧 Adegunjujomiloju@gmail.com</p>
+      <p>📞 +234 812 223 0196</p>
     </section>
+
   </main>
 
   <script>
-    /* section switching */
     function showSection(id) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('nav li').forEach(n => n.classList.remove('active'));
+
       document.getElementById(id).classList.add('active');
       document.getElementById('nav-' + id).classList.add('active');
 
       if (id === 'skills') animateSkills();
     }
 
-    /* typing effect */
+    /* typing */
     const text = "Adegunjujomiloju@gmail.com | +2348122230196";
     let i = 0;
     const typing = document.getElementById("typing");
 
     function typeText() {
-      if (i <= text.length) {
-        typing.textContent = text.slice(0, i) + "|";
-        i++;
-        setTimeout(typeText, 90);
-      } else {
-        i = 0;
-        setTimeout(typeText, 1200);
-      }
+      typing.textContent = text.slice(0, i) + "|";
+      i = i <= text.length ? i + 1 : 0;
+      setTimeout(typeText, i === 0 ? 1200 : 90);
     }
     typeText();
 
-    /* skills animation */
+    /* skills */
     const skills = ["HTML", "CSS", "JavaScript", "Git & GitHub"];
     let s = 0;
     const fill = document.getElementById("skillFill");
