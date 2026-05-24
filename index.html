@@ -1,6 +1,5 @@
-html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8">
@@ -12,32 +11,22 @@ html
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
     rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
-
     :root {
       --primary: #10b981;
     }
 
     .tail-container {
-      font-family: 'Inter', system_ui, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
     }
 
-    .henading-font {
-      font-family: 'Playfair Display', sans-serif;
+    .heading-font {
+      font-family: 'Playfair Display', serif;
     }
 
     .glass {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-    }
-
-    .navbar {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .hero-bg {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     }
 
     .nav-link {
@@ -71,29 +60,24 @@ html
       height: 3px;
       background: #10b981;
       bottom: -8px;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
-    .skill-bar {
-      height: 6px;
-      background: #1f2937;
-      border-radius: 9999px;
-      overflow: hidden;
-    }
-
-    .skill-progress {
-      height: 100%;
-      background: linear-gradient(90deg, #10b981, #34d399);
-      transition: width 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    @media (min-width: 768px) {
+      .section-header:after {
+        left: 0;
+        transform: none;
+      }
     }
 
     .card-hover {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
     }
 
     .card-hover:hover {
-      transform: translateY(-12px) scale(1.03);
-      box-shadow: 0 25px 50px -12px rgb(16 185 129 / 0.25);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(16, 185, 129, .08);
     }
 
     .float-image {
@@ -108,311 +92,593 @@ html
       }
 
       50% {
-        transform: translateY(-25px);
+        transform: translateY(-15px);
       }
     }
 
-    .stat-number {
-      font-variant-numeric: tabular-nums;
+    .dedication-ring {
+      stroke-dasharray: 289;
+      stroke-dashoffset: 289;
     }
-        /* PREMIUM CARD EFFECT */
-        .card-hover {
-          transition: all .5s cubic-bezier(.17, .67, .4, 1.39);
-        }
-      
-        .card-hover:hover {
-          transform: translateY(-15px) scale(1.03);
-          box-shadow:
-            0 0 25px rgba(16, 185, 129, .15),
-            0 0 60px rgba(16, 185, 129, .08);
-        }
-      
-        /* DEDICATION RING */
-        .dedication-ring {
-          stroke-dasharray: 289;
-          stroke-dashoffset: 289;
-        }
-      
-        /* FLOATING ANIMATION */
-        .float-card {
-          animation: floatCard 5s ease-in-out infinite;
-        }
-      
-        @keyframes floatCard {
-      
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-      
-          50% {
-            transform: translateY(-8px);
-          }
-        }
-      
-        /* GLOW EFFECT */
-        .glow {
-          position: absolute;
-          width: 150px;
-          height: 150px;
-          background: rgba(16, 185, 129, .15);
-          filter: blur(60px);
-          border-radius: 50%;
-        }
-      
-        /* PULSE */
-        .pulse-ring {
-          animation: pulse 2s infinite;
-        }
-      
-        @keyframes pulse {
-          0% {
-            transform: scale(1);
-            opacity: 1;
-          }
-      
-          100% {
-            transform: scale(1.3);
-            opacity: 0;
-          }
-        }
-      
 
+    .glow {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: rgba(16, 185, 129, .08);
+      filter: blur(40px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .pulse-ring {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    .skill-progress {
+      width: 0;
+      transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
+    }
+
+    /* Gloomy Atmospheric Background Animations */
+    .gloomy-bg {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gloomy-orb {
+      position: absolute;
+      border-radius: 50%;
+      mix-blend-mode: screen;
+      filter: blur(80px);
+      opacity: 0.15;
+      pointer-events: none;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateY(0px) scale(1);
+      }
+
+      100% {
+        transform: translateY(-30px) scale(1.1);
+      }
+    }
   </style>
 </head>
 
-<body class="tail-container bg-zinc-950 text-white overflow-x-hidden"> <!-- NAVBAR -->
-  <nav class="navbar fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <div class="flex items-center gap-2"> <span class="text-3xl font-bold tracking-tighter heading-font">JA<span
-            class="text-emerald-500">.</span></span> </div>
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium"> <a href="#home"
-          onclick="smoothScrollTo('home')" class="nav-link cursor-pointer">Home</a> <a href="#about"
-          onclick="smoothScrollTo('about')" class="nav-link cursor-pointer">About</a> <a href="#skills"
-          onclick="smoothScrollTo('skills')" class="nav-link cursor-pointer">Skills</a> <a href="#projects"
-          onclick="smoothScrollTo('projects')" class="nav-link cursor-pointer">Projects</a> <a href="#contact"
-          onclick="smoothScrollTo('contact')" class="nav-link cursor-pointer">Contact</a> </div> <a
-        href="https://wa.me/2348122230196" target="_blank"
-        class="px-6 py-3 bg-white text-black rounded-2xl font-semibold flex items-center gap-2 hover:bg-emerald-400 hover:text-black transition-all duration-300">
-        <span>Let’s Talk</span> <i class="fa-solid fa-arrow-right"></i> </a>
+<body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl sm:text-3xl font-bold tracking-tighter heading-font">JA<span
+            class="text-emerald-500">.</span></span>
+      </div>
+
+      <!-- Desktop Navigation Menu -->
+      <div class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium">
+        <a href="#home" class="nav-link cursor-pointer">Home</a>
+        <a href="#about" class="nav-link cursor-pointer">About</a>
+        <a href="#skills" class="nav-link cursor-pointer">Skills</a>
+        <a href="#services" class="nav-link cursor-pointer">Services</a>
+        <a href="#appreciation" class="nav-link cursor-pointer">Reviews</a>
+        <a href="#contact" class="nav-link cursor-pointer">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/2348122230196" target="_blank"
+          class="hidden sm:flex px-5 py-2.5 bg-white text-black rounded-xl font-semibold items-center gap-2 hover:bg-emerald-400 transition-all duration-300 text-sm">
+          <span>Let’s Talk</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menu-btn"
+          class="md:hidden text-2xl p-2 focus:outline-none text-white hover:text-emerald-400 transition-colors"
+          aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
-  </nav> <!-- HERO -->
-  <section id="home" class="hero-bg min-h-screen pt-24 flex items-center relative">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div class="pt-12 md:pt-0">
-        <p class="text-emerald-400 font-medium tracking-widest text-sm mb-4">HELLO, I'M</p>
-        <h1 class="text-6xl md:text-7xl font-bold heading-font leading-none mb-6"> JOMILOJU<br>ADEGUNJU </h1>
-        <p class="text-2xl text-zinc-400 mb-8">Dedicated. Reliable. Results-Driven.</p>
-        <p class="max-w-md text-zinc-300 text-lg leading-relaxed mb-10"> I'm a focused and hardworking individual who
-          takes pride in delivering high-quality work and exceeding expectations. I bring a strong work ethic, great
-          communication, and a willingness to learn and grow with every challenge. </p>
-        <div class="flex flex-wrap gap-4"> <button onclick="downloadCV()"
-            class="px-8 py-4 bg-white text-black rounded-2xl font-semibold flex items-center gap-3 hover:scale-105 transition-all duration-300">
-            <i class="fa-solid fa-download"></i> <span>DOWNLOAD CV</span> </button> <a href="#contact"
-            onclick="smoothScrollTo('contact')"
-            class="px-8 py-4 border border-white/30 hover:border-white/70 rounded-2xl font-semibold flex items-center gap-3 transition-all duration-300">
-            <i class="fa-solid fa-envelope"></i> <span>CONTACT ME</span> </a> </div> <!-- Socials -->
-        <div class="flex gap-6 mt-12"> <a href="#" class="text-2xl hover:text-emerald-400 transition-colors"><i
-              class="fa-brands fa-linkedin"></i></a> <a href="#"
-            class="text-2xl hover:text-emerald-400 transition-colors"><i class="fa-brands fa-instagram"></i></a> <a
-            href="mailto:your.email@example.com" class="text-2xl hover:text-emerald-400 transition-colors"><i
-              class="fa-solid fa-envelope"></i></a> <a href="https://wa.me/2348122230196" target="_blank"
-            class="text-2xl hover:text-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp"></i></a> </div>
-      </div> <!-- Profile Image -->
-      <div class="relative flex justify-center md:justify-end">
-        <div class="relative">
-          <div class="absolute -inset-8 bg-emerald-500/10 rounded-[4rem] -rotate-6"></div> <img id="profile-img"
-            src="thief.png" alt="Jomiloju Adegunju"
-            class="float-image w-80 md:w-96 rounded-3xl shadow-2xl border border-white/10 relative z-10 object-cover">
-          <div class="absolute -bottom-4 -right-4 bg-zinc-900 glass border border-white/10 rounded-2xl p-4 shadow-xl">
-            <div class="flex items-center gap-3">
-              <div class="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
-              <p class="text-sm font-medium">Available for work</p>
+
+    <!-- Mobile Dropdown Navigation Menu -->
+    <div id="mobile-menu"
+      class="hidden md:hidden border-b border-white/10 bg-zinc-950/95 absolute w-full left-0 px-6 py-6 flex flex-col gap-4 text-center text-lg font-medium shadow-2xl">
+      <a href="#home" class="hover:text-emerald-400 py-1 transition-colors">Home</a>
+      <a href="#about" class="hover:text-emerald-400 py-1 transition-colors">About</a>
+      <a href="#skills" class="hover:text-emerald-400 py-1 transition-colors">Skills</a>
+      <a href="#services" class="hover:text-emerald-400 py-1 transition-colors">Services</a>
+      <a href="#appreciation" class="hover:text-emerald-400 py-1 transition-colors">Reviews</a>
+      <a href="#contact" class="hover:text-emerald-400 py-1 transition-colors">Contact</a>
+      <a href="https://wa.me/2348122230196" target="_blank"
+        class="mt-2 w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-black rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300">
+        <span>DM on WhatsApp</span><i class="fa-brands fa-whatsapp text-xl"></i>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home"
+    class="min-h-screen pt-24 sm:pt-28 md:pt-20 flex items-center relative bg-gradient-to-br from-zinc-950 via-zinc-900 to-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full grid md:grid-cols-2 gap-10 md:gap-12 items-center py-10 md:py-16">
+
+      <!-- Text Area -->
+      <div class="order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start">
+        <p class="text-emerald-400 font-medium tracking-widest text-xs sm:text-sm mb-3">HELLO, I'M</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold heading-font leading-tight mb-4">JOMILOJU<br
+            class="hidden md:block"> ADEGUNJU</h1>
+        <p class="text-lg sm:text-2xl text-zinc-400 mb-6 font-medium">Dedicated. Reliable. Results-Driven.</p>
+        <p class="max-w-md text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed mb-8">
+          I'm a focused and hardworking individual who takes pride in delivering high-quality work and exceeding
+          expectations. I bring a strong work ethic, great communication, and a willingness to learn and grow with every
+          challenge.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <button onclick="downloadCV()"
+            class="w-full sm:w-auto px-6 py-3.5 bg-white text-black rounded-2xl font-semibold flex items-center justify-center gap-3 hover:bg-zinc-200 transition-all duration-300 text-sm sm:text-base">
+            <i class="fa-solid fa-download"></i> <span>DOWNLOAD CV</span>
+          </button>
+
+          <!-- Contact Me Link -->
+          <a href="https://wa.me/2348122230196" target="_blank"
+            class="w-full sm:w-auto px-6 py-3.5 border border-white/20 text-white rounded-2xl font-semibold flex items-center justify-center gap-3 hover:border-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-400 hover:scale-[1.03] transition-all duration-300 text-sm sm:text-base">
+            <i class="fa-brands fa-whatsapp text-xl"></i> <span>CONTACT ME</span>
+          </a>
+        </div>
+
+        <!-- Social Icons Menu -->
+        <div class="flex gap-5 mt-8 sm:mt-12">
+          <a href="#" class="text-xl sm:text-2xl text-zinc-400 hover:text-emerald-400 transition-colors"><i
+              class="fa-brands fa-linkedin"></i></a>
+          <a href="#" class="text-xl sm:text-2xl text-zinc-400 hover:text-emerald-400 transition-colors"><i
+              class="fa-brands fa-instagram"></i></a>
+          <a href="mailto:your.email@example.com"
+            class="text-xl sm:text-2xl text-zinc-400 hover:text-emerald-400 transition-colors"><i
+              class="fa-solid fa-envelope"></i></a>
+          <a href="https://wa.me/2348122230196" target="_blank"
+            class="text-xl sm:text-2xl text-zinc-400 hover:text-emerald-400 transition-colors"><i
+              class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Hero Profile Graphic Frame -->
+      <div class="order-1 md:order-2 flex justify-center md:justify-end">
+        <div class="relative max-w-[240px] sm:max-w-[320px] md:max-w-[380px] w-full">
+          <div class="absolute -inset-4 bg-emerald-500/10 rounded-[2rem] md:rounded-[3rem] -rotate-3 md:-rotate-6">
+          </div>
+          <img id="profile-img" src="thief.png" alt="Jomiloju Adegunju"
+            class="float-image w-full h-auto rounded-3xl shadow-2xl border border-white/10 relative z-10 object-cover">
+          <div
+            class="absolute -bottom-3 right-2 bg-zinc-900/90 glass border border-white/10 rounded-xl p-2.5 shadow-xl z-20">
+            <div class="flex items-center gap-2">
+              <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
+              <p class="text-xs font-medium tracking-wide whitespace-nowrap">Available for Work</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT & PREMIUM STATS -->
+  <section id="about" class="py-16 sm:py-20 bg-zinc-900/40 border-t border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 items-center">
+
+        <!-- Left Text Grid Description -->
+        <div class="md:col-span-5 text-center md:text-left">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl heading-font font-semibold mb-6 section-header">About Me</h2>
+          <p class="text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6">
+            I am a highly motivated and responsible individual who believes in discipline, consistency, and continuous
+            execution. I approach every development task as a critical opportunity to add tangible functional value and
+            structural impact.
+          </p>
+          <div
+            class="p-4 border-l-2 border-emerald-500 bg-emerald-500/5 rounded-r-xl max-w-md mx-auto md:mx-0 text-left">
+            <p class="italic text-emerald-300 text-xs sm:text-sm font-medium">"Excellence is not a skill, it's an
+              attitude."</p>
+          </div>
+        </div>
+
+        <!-- Right Side Counters Grid layout -->
+        <div class="md:col-span-7 grid sm:grid-cols-2 gap-4 sm:gap-6 w-full">
+
+          <!-- DEDICATION MATRIX -->
+          <div onclick="animateStat(this)"
+            class="glass rounded-3xl p-6 card-hover cursor-pointer relative overflow-hidden group">
+            <div class="glow top-0 right-0"></div>
+            <div class="absolute top-4 right-4">
+              <div class="w-2.5 h-2.5 bg-emerald-400 rounded-full pulse-ring"></div>
+            </div>
+            <div class="relative flex justify-center items-center mb-4">
+              <svg class="w-20 h-20 rotate-[-90deg]">
+                <circle cx="40" cy="40" r="34" stroke="rgba(255,255,255,0.06)" stroke-width="5" fill="none" />
+                <circle cx="40" cy="40" r="34" stroke="#10b981" stroke-width="5" fill="none" stroke-linecap="round"
+                  class="dedication-ring transition-all duration-[2000ms]" />
+              </svg>
+              <div class="absolute text-center">
+                <div class="text-2xl font-bold text-emerald-400 stat-number" data-target="100">0</div>
+                <p class="text-[9px] tracking-wider text-zinc-400 uppercase font-bold">Dedication</p>
+              </div>
+            </div>
+            <p class="text-center text-[11px] text-zinc-500">Click card to initialize metric parameters</p>
+          </div>
+
+          <!-- COMPLETED PROJECTS ENGINE -->
+          <div onclick="animateStat(this)"
+            class="glass rounded-3xl p-6 card-hover cursor-pointer relative overflow-hidden group text-center flex flex-col items-center justify-center">
+            <div class="glow bottom-0 left-0"></div>
+            <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🚀</div>
+            <div class="text-3xl font-bold text-emerald-400 mb-1 stat-number" data-target="5">0</div>
+            <div class="text-xs tracking-wider uppercase text-zinc-300 font-semibold mb-1">Projects Built</div>
+            <p class="text-zinc-500 text-xs">Engineered with modern architectures and clean design principles.</p>
+          </div>
+
+          <!-- TIMELINE COMPLIANCE -->
+          <div class="glass rounded-3xl p-6 card-hover relative overflow-hidden group">
+            <div class="glow top-0 left-0"></div>
+            <div class="text-2xl font-bold text-emerald-400 mb-2">⚡ RAPID</div>
+            <div class="text-xs tracking-wider uppercase text-zinc-300 font-semibold mb-1">Adaptive Learner</div>
+            <p class="text-zinc-500 text-xs">Configured to quickly absorb framework setups and master tools efficiently.
+            </p>
+          </div>
+
+          <!-- COLLABORATION HUB -->
+          <div class="glass rounded-3xl p-6 card-hover relative overflow-hidden group">
+            <div class="glow bottom-0 right-0"></div>
+            <div class="text-2xl font-bold text-emerald-400 mb-2">🤝 SYNC</div>
+            <div class="text-xs tracking-wider uppercase text-zinc-300 font-semibold mb-1">Team Player</div>
+            <p class="text-zinc-500 text-xs">Maintains clear communication channels across multiple team workflows.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="py-16 sm:py-20 bg-zinc-950">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold heading-font mb-4 section-header">Core Tech Skills</h2>
+        <p class="text-zinc-400 text-sm sm:text-base mt-4">Essential developer proficiencies integrated with functional
+          operations.</p>
+      </div>
+
+      <!-- Skill Rows Wrapper Grid -->
+      <div class="space-y-6 bg-zinc-900/50 border border-white/5 p-6 sm:p-8 rounded-3xl glass">
+
+        <!-- Skill 1 -->
+        <div>
+          <div class="flex justify-between items-center mb-2 text-sm sm:text-base font-medium">
+            <span class="flex items-center gap-2"><i class="fa-brands fa-html5 text-orange-500"></i> HTML5 / CSS3
+              Layouts</span>
+            <span class="text-emerald-400 text-sm font-semibold">90%</span>
+          </div>
+          <div class="w-full h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+            <div class="skill-progress h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full"
+              data-width="90%"></div>
+          </div>
+        </div>
+
+        <!-- Skill 2 -->
+        <div>
+          <div class="flex justify-between items-center mb-2 text-sm sm:text-base font-medium">
+            <span class="flex items-center gap-2"><i class="fa-brands fa-js-square text-yellow-400"></i> JavaScript
+              Architecture</span>
+            <span class="text-emerald-400 text-sm font-semibold">85%</span>
+          </div>
+          <div class="w-full h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+            <div class="skill-progress h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full"
+              data-width="85%"></div>
+          </div>
+        </div>
+
+        <!-- Skill 3 -->
+        <div>
+          <div class="flex justify-between items-center mb-2 text-sm sm:text-base font-medium">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-wind text-sky-400"></i> Responsive UI Design
+              (Tailwind)</span>
+            <span class="text-emerald-400 text-sm font-semibold">95%</span>
+          </div>
+          <div class="w-full h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+            <div class="skill-progress h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full"
+              data-width="95%"></div>
+          </div>
+        </div>
+
+        <!-- Skill 4 -->
+        <div>
+          <div class="flex justify-between items-center mb-2 text-sm sm:text-base font-medium">
+            <span class="flex items-center gap-2"><i class="fa-brands fa-git-alt text-red-500"></i> Git / Version
+              Control Systems</span>
+            <span class="text-emerald-400 text-sm font-semibold">80%</span>
+          </div>
+          <div class="w-full h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+            <div class="skill-progress h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full"
+              data-width="80%"></div>
+          </div>
+        </div>
+
+        <!-- Skill 5 -->
+        <div>
+          <div class="flex justify-between items-center mb-2 text-sm sm:text-base font-medium">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-bug-slash text-purple-400"></i> Problem Solving
+              & Debugging</span>
+            <span class="text-emerald-400 text-sm font-semibold">88%</span>
+          </div>
+          <div class="w-full h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+            <div class="skill-progress h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full"
+              data-width="88%"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SHOWCASE -->
+  <section id="services" class="py-16 sm:py-20 bg-zinc-900/20 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-xl mx-auto mb-12 sm:mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold heading-font mb-4 section-header">Core Value Deliverables</h2>
+        <p class="text-zinc-400 text-sm sm:text-base">What I bring to any operational framework or functional team
+          environment.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Service Card 1 -->
+        <div class="p-6 bg-zinc-900/60 border border-white/5 rounded-2xl card-hover">
+          <div
+            class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xl mb-4">
+            <i class="fa-solid fa-laptop-code"></i></div>
+          <h3 class="text-lg font-bold mb-2">Responsive Web Layouts</h3>
+          <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">Developing modular UI elements that adapt smoothly
+            across modern cross-platform user screen devices.</p>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="p-6 bg-zinc-900/60 border border-white/5 rounded-2xl card-hover">
+          <div
+            class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xl mb-4">
+            <i class="fa-solid fa-bolt"></i></div>
+          <h3 class="text-lg font-bold mb-2">Performance Optimization</h3>
+          <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">Structuring lightweight assets and clean source
+            utilities to ensure fast execution speeds.</p>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="p-6 bg-zinc-900/60 border border-white/5 rounded-2xl card-hover">
+          <div
+            class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xl mb-4">
+            <i class="fa-solid fa-list-check"></i></div>
+          <h3 class="text-lg font-bold mb-2">Task Coordination</h3>
+          <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">Ensuring project feature tasks are synchronized
+            cleanly inside target release timeline horizons.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMER APPRECIATION (STARS & TESTIMONIALS) -->
+  <section id="appreciation" class="py-16 sm:py-20 gloomy-bg bg-zinc-950 border-t border-white/5">
+    <!-- Gloomy Atmospheric Glowing Orbs -->
+    <div class="gloomy-orb w-[250px] h-[250px] bg-emerald-500/10 top-10 left-5"></div>
+    <div class="gloomy-orb w-[300px] h-[300px] bg-teal-500/5 bottom-10 right-5 animate-pulse"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="text-center max-w-xl mx-auto mb-12 sm:mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold heading-font mb-4 section-header">Client Appreciation</h2>
+        <p class="text-zinc-400 text-sm sm:text-base">Feedback and star ratings from past collaborative projects.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Testimonial 1 -->
+        <div
+          class="p-6 rounded-2xl bg-zinc-900/40 border border-white/5 glass card-hover flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-1 text-amber-400 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-zinc-300 text-sm italic leading-relaxed mb-6">
+              "Jomiloju brought an exceptional level of discipline to our project. Delivered highly responsive front-end
+              structures exactly on schedule. The clean layouts scale beautifully on mobile!"
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-white/5">
+            <div
+              class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 font-bold text-sm">
+              EA</div>
+            <div>
+              <h4 class="text-sm font-bold text-white flex items-center gap-1.5">Emmanuel A. <i
+                  class="fa-solid fa-circle-check text-emerald-500 text-xs"></i></h4>
+              <p class="text-zinc-500 text-xs">Project Client</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div
+          class="p-6 rounded-2xl bg-zinc-900/40 border border-white/5 glass card-hover flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-1 text-amber-400 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-zinc-300 text-sm italic leading-relaxed mb-6">
+              "Incredibly adaptive learner. He joined our developer workflow and picked up our local system
+              configuration parameters instantly, troubleshooting bugs with ease."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-white/5">
+            <div
+              class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 font-bold text-sm">
+              TO</div>
+            <div>
+              <h4 class="text-sm font-bold text-white flex items-center gap-1.5">Tunde O. <i
+                  class="fa-solid fa-circle-check text-emerald-500 text-xs"></i></h4>
+              <p class="text-zinc-500 text-xs">Tech Lead Collaborator</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div
+          class="p-6 rounded-2xl bg-zinc-900/40 border border-white/5 glass card-hover flex flex-col justify-between md:col-span-2 lg:col-span-1">
+          <div>
+            <div class="flex items-center gap-1 text-amber-400 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-zinc-300 text-sm italic leading-relaxed mb-6">
+              "Communication was outstanding throughout the layout engineering sprints. A results-driven developer who
+              values deadlines and clean semantic presentation."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-white/5">
+            <div
+              class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 font-bold text-sm">
+              CI</div>
+            <div>
+              <h4 class="text-sm font-bold text-white flex items-center gap-1.5">Chidi I. <i
+                  class="fa-solid fa-circle-check text-emerald-500 text-xs"></i></h4>
+              <p class="text-zinc-500 text-xs">Product Owner</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-      <div class="text-xs tracking-widest opacity-50">SCROLL</div>
-      <div class="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent"></div>
+  </section>
+
+  <!-- DYNAMIC CONTACT CONTEXT SYSTEM LINK -->
+  <section id="contact" class="py-16 sm:py-20 bg-zinc-950 border-t border-white/5 text-center">
+    <div class="max-w-xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl font-bold heading-font mb-4">Let's Open a Channel</h2>
+      <p class="text-zinc-400 text-sm sm:text-base mb-8">Ready to bring your ideas to life? Click below to instantly
+        redirect to my personal WhatsApp DM for a live chat configuration.</p>
+
+      <!-- Interactive Contact Call-to-action to user DM -->
+      <a href="https://wa.me/2348122230196" target="_blank"
+        class="inline-flex px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-2xl items-center justify-center gap-3 shadow-xl shadow-emerald-500/10 hover:shadow-emerald-500/20 hover:scale-[1.05] active:scale-[0.98] transition-all duration-300 w-full sm:w-auto">
+        <i class="fa-brands fa-whatsapp text-2xl"></i> <span class="tracking-wide">Launch WhatsApp Chat</span>
+      </a>
     </div>
-  </section> <!-- ABOUT -->
-  <section id="about" class="py-24 bg-zinc-900">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid md:grid-cols-12 gap-16"> <!-- Left Text -->
-        <div class="md:col-span-5">
-          <h2 class="text-5xl heading-font font-semibold mb-8 section-header">About Me</h2>
-          <p class="text-zinc-300 text-lg leading-relaxed"> I am a motivated and responsible individual who believes in
-            discipline, consistency, and continuous improvement. I treat every task as an opportunity to add value and
-            make an impact. </p>
-          <div class="mt-12">
-            <p class="italic text-emerald-300">"Excellence is not a skill, it's an attitude."</p>
-            <p class="mt-3 text-sm text-zinc-500">- Jomiloju Adegunju</p>
-          </div>
-       !-- ========================= -->
-      <!-- PREMIUM STATS SECTION -->
-      <!-- ========================= -->
-      
-      
-      <!-- Stats Grid -->
-      <div class="md:col-span-7 grid grid-cols-2 gap-6">
-      
-        <!-- DEDICATION -->
-        <div onclick="animateStat(this)"
-          class="glass rounded-3xl p-8 card-hover cursor-pointer relative overflow-hidden group float-card">
-      
-          <!-- Glow -->
-          <div class="glow top-0 right-0"></div>
-      
-          <!-- Animated pulse -->
-          <div class="absolute top-6 right-6">
-            <div class="w-3 h-3 bg-emerald-400 rounded-full pulse-ring"></div>
-          </div>
-      
-          <!-- Ring -->
-          <div class="relative flex justify-center items-center mb-6">
-      
-            <svg class="w-28 h-28 rotate-[-90deg]">
-      
-              <!-- Background -->
-              <circle cx="56" cy="56" r="46" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="none" />
-      
-              <!-- Progress -->
-              <circle cx="56" cy="56" r="46" stroke="#10b981" stroke-width="8" fill="none" stroke-linecap="round"
-                class="dedication-ring transition-all duration-[2500ms]" />
-      
-            </svg>
-      
-            <!-- Number -->
-            <div class="absolute text-center">
-              <div class="text-4xl font-bold text-emerald-400 stat-number" data-target="100">100</div>
-      
-              <p class="text-xs tracking-widest text-zinc-400">
-                DEDICATION
-              </p>
-            </div>
-          </div>
-      
-          <div class="h-1.5 w-16 bg-emerald-500 rounded mx-auto"></div>
-        </div>
-      
-        <!-- PROJECTS -->
-        <div onclick="animateStat(this)"
-          class="glass rounded-3xl p-8 card-hover cursor-pointer relative overflow-hidden group float-card">
-      
-          <div class="glow bottom-0 left-0"></div>
-      
-          <div class="relative z-10 text-center">
-      
-            <div class="text-6xl mb-4 animate-bounce">
-              🚀
-            </div>
-      
-            <div class="text-5xl font-bold text-emerald-400 mb-2 stat-number" data-target="5">100</div>
-      
-            <div class="text-sm tracking-widest uppercase text-zinc-300">
-              Projects Completed
-            </div>
-      
-            <p class="text-zinc-500 text-sm mt-4">
-              Real projects built with creativity and modern tools.
-            </p>
-      
-          </div>
-        </div>
-      
-        <!-- FAST LEARNER -->
-        <div class="glass rounded-3xl p-8 card-hover relative overflow-hidden group float-card">
-      
-          <div class="glow top-0 left-0"></div>
-      
-          <div class="relative z-10">
-      
-            <div class="text-5xl font-bold text-emerald-400 mb-6 flex items-center gap-3">
-              ⚡ FAST
-            </div>
-      
-            <div class="text-sm tracking-widest uppercase text-zinc-300">
-              Learner
-            </div>
-      
-            <p class="text-zinc-500 text-sm mt-4">
-              Quick to adapt and master new systems efficiently.
-            </p>
-      
-          </div>
-        </div>
-      
-        <!-- TEAM PLAYER -->
-        <div class="glass rounded-3xl p-8 card-hover relative overflow-hidden group float-card">
-      
-          <div class="glow bottom-0 right-0"></div>
-      
-          <div class="relative z-10">
-      
-            <div class="text-5xl font-bold text-emerald-400 mb-6 flex items-center gap-3">
-              🤝 TEAM
-            </div>
-      
-            <div class="text-sm tracking-widest uppercase text-zinc-300">
-              Player
-            </div>
-      
-            <p class="text-zinc-500 text-sm mt-4">
-              Strong communication and teamwork abilities.
-            </p>
-      
-          </div>
-        </div>
-      
-      </div>
-      
-      <!-- ========================= -->
-      <!-- PREMIUM COUNTER SCRIPT -->
-      <!-- ========================= -->
-      
-      <script>
-        function animateStat(el) {
+  </section>
 
-          const numberEl = el.querySelector('.stat-number');
+  <!-- FOOTER -->
+  <footer
+    class="py-8 bg-black text-center text-xs text-zinc-600 border-t border-white/5 px-4 flex flex-col items-center justify-center gap-2">
+    <p>&copy; 2026 Jomiloju Adegunju. All Rights Reserved.</p>
+    <p class="text-zinc-700 tracking-wider">Engineered by <span class="text-emerald-500/60 font-medium">Jomiloju
+        Adegunju</span> &middot; Designed for high-performance operations</p>
+  </footer>
 
-          if (!numberEl || numberEl.classList.contains("done")) return;
+  <!-- FUNCTIONAL CONTROLLER SYSTEM LOGIC -->
+  <script>
+    // Toggle Mobile Navigation Dropdown Menu Structure
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-          numberEl.classList.add("done");
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuBtn.querySelector('i');
+      if (mobileMenu.classList.contains('hidden')) {
+        icon.className = 'fa-solid fa-bars';
+      } else {
+        icon.className = 'fa-solid fa-xmark';
+      }
+    });
 
-          const target = parseInt(numberEl.dataset.target);
+    // Close Mobile Dropdown layout dynamically when clicking outside or onto references
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && e.target !== menuBtn) {
+        mobileMenu.classList.add('hidden');
+        menuBtn.querySelector('i').className = 'fa-solid fa-bars';
+      }
+    });
 
-          let current = 0;
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.querySelector('i').className = 'fa-solid fa-bars';
+      });
+    });
 
-          const increment = target / 80;
+    // Premium Counter Engine & Circular Path Logic
+    function animateStat(el) {
+      const numberEl = el.querySelector('.stat-number');
+      if (!numberEl || numberEl.classList.contains("done")) return;
+      numberEl.classList.add("done");
 
-          const counter = setInterval(() => {
+      const target = parseInt(numberEl.dataset.target);
+      let current = 0;
+      const duration = 1800;
+      const frameRate = 1000 / 60;
+      const totalFrames = duration / frameRate;
+      const increment = target / totalFrames;
 
-            current += increment;
-
-            if (current >= target) {
-              current = target;
-              clearInterval(counter);
-            }
-
-            numberEl.textContent = Math.floor(current);
-
-          }, 20);
-
-          // Ring Animation
-          const ring = el.querySelector(".dedication-ring");
-
-          if (ring) {
-
-            const circumference = 289;
-
-            const offset = circumference - (target / 100) * circumference;
-
-            setTimeout(() => {
-              ring.style.strokeDashoffset = offset;
-            }, 200);
-
-          }
+      const counter = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(counter);
         }
-      </script>
+        numberEl.textContent = Math.floor(current);
+      }, frameRate);
+
+      const ring = el.querySelector(".dedication-ring");
+      if (ring) {
+        const circumference = 289;
+        const offset = circumference - (target / 100) * circumference;
+        setTimeout(() => {
+          ring.style.strokeDashoffset = offset;
+        }, 100);
+      }
+    }
+
+    // Intersection Observer to trigger loading animations automatically
+    const skillsSection = document.getElementById('skills');
+    const skillBars = document.querySelectorAll('.skill-progress');
+
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          skillBars.forEach(bar => {
+            bar.style.width = bar.getAttribute('data-width');
+          });
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    if (skillsSection) {
+      skillObserver.observe(skillsSection);
+    }
+
+    // Placeholder Function for CV Download System execution
+    function downloadCV() {
+      alert("CV file distribution logic initiated. Please configure this method function with your valid file source path link mapping.");
+    }
+  </script>
+</body>
+
+</html>
